@@ -13,7 +13,7 @@
 
 
 
-<title>snack | Cibo&#39;s World</title>
+<title>About me | Cibo&#39;s World</title>
 
 
 
@@ -127,11 +127,76 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">snack</h1>
+            <h1 class="post-title">About me</h1>
             
                 <div class="post-meta">
                     
@@ -140,7 +205,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">September 22, 2023&nbsp;&nbsp;8:59:36</a>
+                        Date: <a href="#">September 23, 2023&nbsp;&nbsp;11:19:58</a>
                         </span>
                     
                     
@@ -149,7 +214,9 @@
         </header>
 
         <div class="post-content">
-            
+            <h2 id="Who-am-I"><a href="#Who-am-I" class="headerlink" title="Who am I?"></a>Who am I?</h2><p>  I am waiting for find out this someday too.</p>
+<p>  hoping to renew later!<br>  (鸽了)</p>
+
         </div>
 
         
@@ -163,7 +230,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://example.com/2023/09/22/snack/">http://example.com/2023/09/22/snack/</a></span>
+                        <span><a href="http://example.com/2023/09/23/About-me/">http://example.com/2023/09/23/About-me/</a></span>
                     </p>
                 
                 
@@ -196,10 +263,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2023/09/23/FPGA/">FPGA</a>
             
-            
-            <a class="next" rel="next" href="/2023/09/21/hello-world/">Hello World</a>
+            <a class="next" rel="next" href="/2023/09/23/%E5%BD%A2%E7%AD%96/">形策</a>
             
         </section>
 
